@@ -6,7 +6,7 @@ const List = styled("ul")`
   list-style: none;
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: center;
   flex-direction: ${props =>
     props.horizontal ? "row" : props.vertical ? "column" : "intiial"};
 `;

@@ -4,16 +4,22 @@ import { basicTransition, boxShadow } from "../../utils/classes";
 const ChoiceCard = styled("li")`
   ${boxShadow};
   ${basicTransition};
+  background-image: ${props =>
+    props.bgImage ? `url(${props.bgImage})` : "none"};
+  background-size: cover;
+  background-position: center center;
   cursor: pointer;
   list-style: none;
-  height: 200px;
   width: 35%;
+  max-width: 250px;
+  height: 200px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
   text-align: left;
   border-radius: 4px;
   padding: 0.75rem 1rem;
+  margin: 0 1rem;
   position: relative;
   & > * {
     position: relative;
