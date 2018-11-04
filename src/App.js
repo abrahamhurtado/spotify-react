@@ -1,11 +1,16 @@
+import { Router } from "@reach/router";
 import React, { Component } from "react";
 import "./App.css";
-import Hero from './components/Hero';
+import Authorized from "./components/Authorized";
+import Hero from "./components/Hero";
 
 class App extends Component {
   render() {
     return (
-      <Hero />
+      <Router>
+        <Hero path="/" />
+        <Authorized path="/authorized" />
+      </Router>
     );
   }
 }
