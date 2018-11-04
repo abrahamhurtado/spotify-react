@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import bg from "../media/music2.jpg";
+import { getTopArtists, getTopTracks } from "../utils/api";
+import { generateRandomNumber } from "../utils/random";
+import { tokenExpired } from "../utils/tokenExpired";
 import ChoiceCard from "./Elements/ChoiceCard";
 import ChoiceTitle from "./Elements/ChoiceTitle";
 import HeroBackground from "./Elements/HeroBackground";
@@ -7,6 +10,44 @@ import { Title } from "./Elements/HeroTitles";
 import List from "./Elements/List";
 
 export default class TopMusic extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      artistImage: "",
+      trackImage: ""
+    };
+  }
+  componentDidMount() {
+    if (tokenExpired()) {
+      setTimeout(() => this.props.navigate("/"), 0);
+    } else {
+      const randomNumber = generateRandomNumber(50);
+      Promise.all([
+        getTopArtists({
+          limit: 1,
+          offset: randomNumber,
+          time_range: "long_term"
+        }),
+        getTopTracks({
+          limit: 1,
+          offset: randomNumber,
+          time_range: "long_term"
+        })
+      ])
+        .then(([artist, track]) => {
+          const artistImage = artist.items[0].images[0].url;
+          const trackImage = track.items[0].album.images[0].url;
+
+          this.setState({
+            artistImage,
+            trackImage
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  }
   render() {
     return (
       <HeroBackground
@@ -23,6 +64,7 @@ export default class TopMusic extends Component {
         <Title>Elige lo que quieres conocer</Title>
         <List horizontal>
           <ChoiceCard
+            bgImage={this.state.artistImage}
             gradientStyles={{
               gradientFallback: "#667db6",
               gradientFallbackWebkit:
@@ -35,6 +77,7 @@ export default class TopMusic extends Component {
             <ChoiceTitle>Mis artistas más escuchados</ChoiceTitle>
           </ChoiceCard>
           <ChoiceCard
+            bgImage={this.state.trackImage}
             gradientStyles={{
               gradientFallback: "#ff4b1f",
               gradientFallbackWebkit:
