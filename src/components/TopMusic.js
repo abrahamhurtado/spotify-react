@@ -1,3 +1,4 @@
+import { Link } from "@reach/router";
 import React, { Component } from "react";
 import bg from "../media/music2.jpg";
 import { getTopArtists, getTopTracks } from "../utils/api";
@@ -63,31 +64,35 @@ export default class TopMusic extends Component {
       >
         <Title>Elige lo que quieres conocer</Title>
         <List horizontal>
-          <ChoiceCard
-            bgImage={this.state.artistImage}
-            gradientStyles={{
-              gradientFallback: "#667db6",
-              gradientFallbackWebkit:
-                "-webkit-linear-gradient(to left, #667db6, #0082c8, #0082c8, #667db6)",
-              gradient:
-                "linear-gradient(to left, #667db6, #0082c8, #0082c8, #667db6)",
-              opacity: 0.5
-            }}
-          >
-            <ChoiceTitle>Mis artistas más escuchados</ChoiceTitle>
-          </ChoiceCard>
-          <ChoiceCard
-            bgImage={this.state.trackImage}
-            gradientStyles={{
-              gradientFallback: "#ff4b1f",
-              gradientFallbackWebkit:
-                "-webkit-linear-gradient(to bottom, #ff4b1f, #1fddff)",
-              gradient: "linear-gradient(to bottom, #ff4b1f, #1fddff)",
-              opacity: 0.5
-            }}
-          >
-            <ChoiceTitle>Mis canciones más escuchadas</ChoiceTitle>
-          </ChoiceCard>
+          <Link to="/" style={{ textDecoration: "none", margin: "0 1rem" }}>
+            <ChoiceCard
+              bgImage={this.state.artistImage}
+              gradientStyles={{
+                gradientFallback: "#667db6",
+                gradientFallbackWebkit:
+                  "-webkit-linear-gradient(to left, #667db6, #0082c8, #0082c8, #667db6)",
+                gradient:
+                  "linear-gradient(to left, #667db6, #0082c8, #0082c8, #667db6)",
+                opacity: 0.5
+              }}
+            >
+              <ChoiceTitle>Mis artistas más escuchados</ChoiceTitle>
+            </ChoiceCard>
+          </Link>
+          <Link to="/" style={{ textDecoration: "none", margin: "0 1rem" }}>
+            <ChoiceCard
+              bgImage={this.state.trackImage}
+              gradientStyles={{
+                gradientFallback: "#ff4b1f",
+                gradientFallbackWebkit:
+                  "-webkit-linear-gradient(to bottom, #ff4b1f, #1fddff)",
+                gradient: "linear-gradient(to bottom, #ff4b1f, #1fddff)",
+                opacity: 0.5
+              }}
+            >
+              <ChoiceTitle>Mis canciones más escuchadas</ChoiceTitle>
+            </ChoiceCard>
+          </Link>
         </List>
       </HeroBackground>
     );

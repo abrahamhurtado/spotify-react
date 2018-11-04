@@ -10,7 +10,6 @@ const ChoiceCard = styled("li")`
   background-position: center center;
   cursor: pointer;
   list-style: none;
-  width: 35%;
   max-width: 250px;
   height: 200px;
   display: flex;
@@ -19,7 +18,6 @@ const ChoiceCard = styled("li")`
   text-align: left;
   border-radius: 4px;
   padding: 0.75rem 1rem;
-  margin: 0 1rem;
   position: relative;
   & > * {
     position: relative;
