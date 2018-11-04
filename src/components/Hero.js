@@ -1,5 +1,9 @@
 import React from "react";
+import { cx } from "react-emotion";
 import bgImage from "../media/music.jpg";
+import { basicTransition, boxShadow } from "../utils/classes";
+import { tokenExpired } from "../utils/tokenExpired";
+import Button from "./Elements/Button";
 import HeroBackground from "./Elements/HeroBackground";
 import HeroBox from "./Elements/HeroBox";
 import { Subtitle, Title } from "./Elements/HeroTitles";
@@ -20,7 +24,20 @@ const Hero = props => (
     <HeroBox>
       <Title>Descubre cuáles son tus artistas y canciones favoritas</Title>
       <Subtitle>Con la ayuda de los datos de Spotify</Subtitle>
-      <SpotifyButton />
+      {tokenExpired() ? (
+        <SpotifyButton />
+      ) : (
+        <Button
+          hierarchy="primary"
+          action="dark"
+          className={cx(boxShadow, basicTransition)}
+          onClick={() => {
+            setTimeout(() => props.navigate("top"), 0);
+          }}
+        >
+          Quiero ver mis resultados
+        </Button>
+      )}
     </HeroBox>
     <MutedText style={{ marginTop: 0 }}>
       Hecho por{" "}
