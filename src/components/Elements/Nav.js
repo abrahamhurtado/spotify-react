@@ -5,6 +5,9 @@ const Nav = styled("nav")`
   display: flex;
   align-items: center;
   background: #333;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
   h1 {
     font-size: 1rem;
     font-weight: normal;
@@ -13,6 +16,7 @@ const Nav = styled("nav")`
     padding: 0 1rem;
   }
   ul {
+    margin: 0;
     a {
       width: 50%;
       margin: 0 !important;

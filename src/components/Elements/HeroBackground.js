@@ -2,11 +2,12 @@ import styled from "react-emotion";
 
 const HeroBackground = styled("div")`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: ${props => (props.bgImage ? `url(${props.bgImage})` : "none")};
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   position: relative;
   display: flex;
   flex-direction: column;
