@@ -10,7 +10,7 @@ const HeroBackground = styled("div")`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: ${props => (!props.root ? "flex-start" : "center")};
   align-items: center;
   text-align: center;
   & > * {
