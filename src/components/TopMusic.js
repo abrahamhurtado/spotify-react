@@ -4,15 +4,14 @@ import bg from "../media/music2.jpg";
 import { getTopArtists, getTopTracks } from "../utils/api";
 import { generateRandomNumber } from "../utils/random";
 import { tokenExpired } from "../utils/tokenExpired";
+import Artists from "./Artists";
 import ChoiceCard from "./Elements/ChoiceCard";
 import ChoiceTitle from "./Elements/ChoiceTitle";
 import HeroBackground from "./Elements/HeroBackground";
 import { Title } from "./Elements/HeroTitles";
 import List from "./Elements/List";
 import Nav from "./Elements/Nav";
-
-const Tracks = props => <h1>Tracks</h1>;
-const Artists = props => <h1>Artists</h1>;
+import Tracks from "./Tracks";
 
 const Main = props => (
   <React.Fragment>
