@@ -11,7 +11,7 @@ class App extends Component {
       <Router>
         <Hero path="/" />
         <Authorized path="/authorized" />
-        <TopMusic path="/top" />
+        <TopMusic path="/top/*" />
       </Router>
     );
   }
