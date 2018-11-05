@@ -8,8 +8,10 @@ import Artists from "./Artists";
 import ChoiceCard from "./Elements/ChoiceCard";
 import ChoiceTitle from "./Elements/ChoiceTitle";
 import HeroBackground from "./Elements/HeroBackground";
+import HeroBox from "./Elements/HeroBox";
 import { Title } from "./Elements/HeroTitles";
 import List from "./Elements/List";
+import MutedText from "./Elements/MutedText";
 import Nav from "./Elements/Nav";
 import Tracks from "./Tracks";
 
@@ -17,7 +19,10 @@ const Main = props => (
   <React.Fragment>
     <Title>Quiero conocer</Title>
     <List horizontal>
-      <Link to="artists" style={{ textDecoration: "none", margin: "0 1rem" }}>
+      <Link
+        to="artists"
+        style={{ textDecoration: "none", margin: "0 1rem", width: "50%" }}
+      >
         <ChoiceCard
           bgImage={props.artistImage}
           gradientStyles={{
@@ -32,7 +37,10 @@ const Main = props => (
           <ChoiceTitle>Mis artistas favoritos</ChoiceTitle>
         </ChoiceCard>
       </Link>
-      <Link to="tracks" style={{ textDecoration: "none", margin: "0 1rem" }}>
+      <Link
+        to="tracks"
+        style={{ textDecoration: "none", margin: "0 1rem", width: "50%" }}
+      >
         <ChoiceCard
           bgImage={props.trackImage}
           gradientStyles={{
@@ -105,7 +113,9 @@ export default class TopMusic extends Component {
         }}
       >
         {isMainRoute ? (
-          <Main {...this.state} />
+          <HeroBox>
+            <Main {...this.state} />
+          </HeroBox>
         ) : (
           <Nav root={isMainRoute}>
             {" "}
@@ -116,6 +126,12 @@ export default class TopMusic extends Component {
           <Artists path="artists" />
           <Tracks path="tracks" />
         </Router>
+        <MutedText style={{ marginTop: 0 }}>
+          Hecho por{" "}
+          <a href="https://abrahamhurtado.github.io/" style={{ color: "#fff" }}>
+            Abraham Hurtado
+          </a>
+        </MutedText>
       </HeroBackground>
     );
   }
