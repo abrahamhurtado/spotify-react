@@ -1,4 +1,4 @@
-import { Link } from "@reach/router";
+import { Link, Router } from "@reach/router";
 import React, { Component } from "react";
 import bg from "../media/music2.jpg";
 import { getTopArtists, getTopTracks } from "../utils/api";
@@ -9,6 +9,47 @@ import ChoiceTitle from "./Elements/ChoiceTitle";
 import HeroBackground from "./Elements/HeroBackground";
 import { Title } from "./Elements/HeroTitles";
 import List from "./Elements/List";
+import Nav from "./Elements/Nav";
+
+const Tracks = props => <h1>Tracks</h1>;
+const Artists = props => <h1>Artists</h1>;
+
+const Main = props => (
+  <React.Fragment>
+    <Title>Quiero conocer</Title>
+    <List horizontal>
+      <Link to="artists" style={{ textDecoration: "none", margin: "0 1rem" }}>
+        <ChoiceCard
+          bgImage={props.artistImage}
+          gradientStyles={{
+            gradientFallback: "#667db6",
+            gradientFallbackWebkit:
+              "-webkit-linear-gradient(to left, #667db6, #0082c8, #0082c8, #667db6)",
+            gradient:
+              "linear-gradient(to left, #667db6, #0082c8, #0082c8, #667db6)",
+            opacity: 0.5
+          }}
+        >
+          <ChoiceTitle>Mis artistas favoritos</ChoiceTitle>
+        </ChoiceCard>
+      </Link>
+      <Link to="tracks" style={{ textDecoration: "none", margin: "0 1rem" }}>
+        <ChoiceCard
+          bgImage={props.trackImage}
+          gradientStyles={{
+            gradientFallback: "#ff4b1f",
+            gradientFallbackWebkit:
+              "-webkit-linear-gradient(to bottom, #ff4b1f, #1fddff)",
+            gradient: "linear-gradient(to bottom, #ff4b1f, #1fddff)",
+            opacity: 0.5
+          }}
+        >
+          <ChoiceTitle>Mis canciones favoritas</ChoiceTitle>
+        </ChoiceCard>
+      </Link>
+    </List>
+  </React.Fragment>
+);
 
 export default class TopMusic extends Component {
   constructor(props) {
@@ -50,8 +91,10 @@ export default class TopMusic extends Component {
     }
   }
   render() {
+    const isMainRoute = !this.props["*"];
     return (
       <HeroBackground
+        root={isMainRoute}
         bgImage={bg}
         gradientStyles={{
           gradientFallback: "rgba(34, 193, 195)",
@@ -62,38 +105,18 @@ export default class TopMusic extends Component {
           opacity: 0.5
         }}
       >
-        <Title>Elige lo que quieres conocer</Title>
-        <List horizontal>
-          <Link to="/" style={{ textDecoration: "none", margin: "0 1rem" }}>
-            <ChoiceCard
-              bgImage={this.state.artistImage}
-              gradientStyles={{
-                gradientFallback: "#667db6",
-                gradientFallbackWebkit:
-                  "-webkit-linear-gradient(to left, #667db6, #0082c8, #0082c8, #667db6)",
-                gradient:
-                  "linear-gradient(to left, #667db6, #0082c8, #0082c8, #667db6)",
-                opacity: 0.5
-              }}
-            >
-              <ChoiceTitle>Mis artistas más escuchados</ChoiceTitle>
-            </ChoiceCard>
-          </Link>
-          <Link to="/" style={{ textDecoration: "none", margin: "0 1rem" }}>
-            <ChoiceCard
-              bgImage={this.state.trackImage}
-              gradientStyles={{
-                gradientFallback: "#ff4b1f",
-                gradientFallbackWebkit:
-                  "-webkit-linear-gradient(to bottom, #ff4b1f, #1fddff)",
-                gradient: "linear-gradient(to bottom, #ff4b1f, #1fddff)",
-                opacity: 0.5
-              }}
-            >
-              <ChoiceTitle>Mis canciones más escuchadas</ChoiceTitle>
-            </ChoiceCard>
-          </Link>
-        </List>
+        {isMainRoute ? (
+          <Main {...this.state} />
+        ) : (
+          <Nav root={isMainRoute}>
+            {" "}
+            <Main {...this.state} />{" "}
+          </Nav>
+        )}
+        <Router>
+          <Artists path="artists" />
+          <Tracks path="tracks" />
+        </Router>
       </HeroBackground>
     );
   }
