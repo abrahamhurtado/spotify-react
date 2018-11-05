@@ -21,3 +21,27 @@ export const spotifyButton = css`
 export const basicTransition = css`
   transition: all 0.2s ease-in;
 `;
+
+export const positionAfterPseudoElement = props => css`
+  &::after {
+    content: "${props.position}";
+    display: block;
+    position: absolute;
+    background: red;
+    color: #f7f7f7;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    opacity: .25;
+    font-size: 1.5rem;
+    ${basicTransition}
+  }
+  &:hover {
+    &::after {
+      opacity: 1;
+    }
+  }
+`;
