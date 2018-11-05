@@ -12,20 +12,29 @@ import TrackInfo from "./Elements/TrackInfo";
 export default class Tracks extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      tracks: []
-    };
+    if (localStorage.hasOwnProperty("tracks")) {
+      this.state = {
+        tracks: JSON.parse(localStorage.getItem("tracks"))
+      };
+    } else {
+      this.state = {
+        tracks: []
+      };
+    }
   }
   componentDidMount() {
-    getTopTracks({ limit: 50, offset: 0, time_range: "long_term" })
-      .then(data => {
-        this.setState({
-          tracks: data.items
+    if (!localStorage.hasOwnProperty("tracks")) {
+      getTopTracks({ limit: 50, offset: 0, time_range: "long_term" })
+        .then(data => {
+          localStorage.setItem("tracks", JSON.stringify(data.items));
+          this.setState({
+            tracks: data.items
+          });
+        })
+        .catch(error => {
+          console.log(error);
         });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    }
   }
   render() {
     const { tracks } = this.state;

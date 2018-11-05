@@ -10,20 +10,29 @@ import TrackInfo from "./Elements/TrackInfo";
 export default class Tracks extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      artists: []
-    };
+    if (localStorage.hasOwnProperty("artists")) {
+      this.state = {
+        artists: JSON.parse(localStorage.getItem("artists"))
+      };
+    } else {
+      this.state = {
+        artists: []
+      };
+    }
   }
   componentDidMount() {
-    getTopArtists({ limit: 50, offset: 0, time_range: "long_term" })
-      .then(data => {
-        this.setState({
-          artists: data.items
+    if (!localStorage.hasOwnProperty("artists")) {
+      getTopArtists({ limit: 50, offset: 0, time_range: "long_term" })
+        .then(data => {
+          localStorage.setItem("artists", JSON.stringify(data.items));
+          this.setState({
+            artists: data.items
+          });
+        })
+        .catch(error => {
+          console.log(error);
         });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    }
   }
   render() {
     const { artists } = this.state;
